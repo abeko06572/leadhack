@@ -18,7 +18,7 @@ app.get('/api/get',function (req, res) {
 
 app.post('/',function (req, res) {
     const data = req.body;
-    console.log('req.body',data);
+    console.log('req.body',data['events'][0]['message']['id']);
     res.send('api:OK');
 });
 
