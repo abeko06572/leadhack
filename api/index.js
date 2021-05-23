@@ -54,18 +54,20 @@ app.post('/',function (req, res) {
             
             const resBody = JSON.parse(body);
 
+            console.log(resBody);
+
             const messageData = {
                 "replyToken": replyToken,
                 "messages": [
                     {
                         "type": "text",
-                        "text": "Message Body (メッセージ本文)"
+                        "text": resBody.predictions[0].probability+'\n'+resBody.predictions[0].tagName
                     }
                 ]
             }
 
             const optionsLine = {
-                uri: 'https://api-data.line.me/v2/bot/message/reply',
+                uri: 'https://api.line.me/v2/bot/message/reply',
                 method: 'post',
                 headers: {
                     'Content-type': 'application/json',
@@ -78,4 +80,4 @@ app.post('/',function (req, res) {
     });
 });
 
-(process.env.NOW_REGION) ? module.exports = app : app.listen(PORT); 
+(process.env.NOW_REGION) ? module.exports = app : app.listen(PORT);
